@@ -1,9 +1,28 @@
+'''
+to-do:
+1. Tests to make sure everythings works(start codons, lengths, etc.)
+2. Test to compare gbk vs gff3 to make sure everything matches 100%
+3. Adapting for more than one chromosome contig
+4. Function to filter genes we might not want to analyze(genes not %3, letters that aren't ATGC, really long/short genes) 
+5. Cleaning up genes that have the same locus tag in multiple rows (ribosomal slippage also)
+6. Better commenting
+7. Consider genes that overlap/straddle boundaries
+
+'''
 import pandas as pd
 from Bio import SeqIO
 
 def compile_sequences(gff3_location, fasta_location, upstream_len = 10):
     """
+    Inputs: 
+    gff3_location - location of gff3 file on your computer as a string
+    fasta_location - location of fasta file on your computer as a string
+    upstream_len - integer specifiying the length of the upstream sequence
     
+    Outputs:
+    
+    
+    description of funtion
     """
     
 
@@ -16,8 +35,10 @@ def compile_sequences(gff3_location, fasta_location, upstream_len = 10):
     #read in genome 
     genome = list(SeqIO.parse(fasta_location, "fasta"))
     assert len(genome) == 1
+    assert len(set(df["genome_id"])) == 1
     genome = genome[0]
-
+    
+    assert(df.iloc[0]["genome_id"] == genome.id)
 
     #getting coding sequences
 
