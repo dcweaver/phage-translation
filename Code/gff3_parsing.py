@@ -30,9 +30,10 @@ def compile_sequences(gff3_location, fasta_location, upstream_len = 10):
     
 
     #setting up dataframe
-    df = pd.read_csv(gff3_location, sep='\t', skiprows=2, header=None)
+    df = pd.read_csv(gff3_location, sep='\t', comment = "#", header=None)
     df.columns = ["genome_id", "source", "type", "start", "stop", "idk", "strand", "trash", "qualifiers"]
     df = df[df["type"]=='CDS']
+    df['genome_id'] = df['genome_id'].astype(str)
 
 
     #read in genome 
